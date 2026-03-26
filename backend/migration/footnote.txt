@@ -1,0 +1,14 @@
+# Mac
+brew install golang-migrate
+
+# Windows (scoop)
+scoop install migrate
+
+# Or via Go
+go install -tags 'postgres' github.com/golang-migrate/migrate/v4/cmd/migrate@latest
+
+# Up (apply)
+migrate -path migration/ -database "postgres://postgres:yourpassword@localhost:5432/profile_web?sslmode=disable" up
+
+# Down (rollback)
+migrate -path migration/ -database "postgres://postgres:yourpassword@localhost:5432/profile_web?sslmode=disable" down

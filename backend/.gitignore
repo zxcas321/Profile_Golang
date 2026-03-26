@@ -1,0 +1,7 @@
+# Environment
+.env
+
+# Go
+*.exe
+*.out
+/vendor
