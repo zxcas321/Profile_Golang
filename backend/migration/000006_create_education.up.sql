@@ -8,5 +8,6 @@ CREATE TABLE educations (
     field VARCHAR(150),
     start_year INT,
     end_year INT,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    deleted_at TIMESTAMP DEFAULT NULL
 );

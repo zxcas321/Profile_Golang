@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"flag"
 
 	"profile_go/config"
 
@@ -9,21 +10,22 @@ import (
 )
 
 func main() {
-	// Load .env
-	if err := godotenv.Load("../../.env"); err != nil {
+	if err := godotenv.Load(); err != nil {
 		log.Println("No .env file, using system env")
 	}
 
-	// 1. Create DB if not exists
-	config.CreateDatabaseIfNotExists()
+    fresh := flag.Bool("fresh", false, "Drop and recreate database")
+    flag.Parse()
 
-	// 2. Connect to DB
+    if *fresh {
+        config.DropDatabase()
+        config.CreateDatabaseIfNotExists()
+    }
+
 	db := config.ConnectDB()
 	defer db.Close()
 
-	// 3. Run migrations automatically
 	config.RunMigrations(db)
 
 	log.Println("Server starting...")
-	// next: start HTTP server here
 }

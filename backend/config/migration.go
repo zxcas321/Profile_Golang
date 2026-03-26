@@ -16,8 +16,7 @@ func RunMigrations(db *sql.DB) {
 	if err != nil {
 		log.Fatal("Failed to create migration driver:", err)
 	}
-
-	// Get absolute path to migration folder
+	
 	migrationPath := getMigrationPath()
 
 	m, err := migrate.NewWithDatabaseInstance(
@@ -38,7 +37,7 @@ func RunMigrations(db *sql.DB) {
 
 func getMigrationPath() string {
     dir, _ := os.Getwd()
-    path := filepath.Join(dir, "..", "..", "migration")
+    path := filepath.Join(dir, "migration")
     path = filepath.ToSlash(path)
     return "file://" + path
 }
